@@ -1,8 +1,8 @@
 package providers
 
 import (
-	"github.com/hravemzdy/golegalios/internal/props"
-	"github.com/hravemzdy/golegalios/internal/types"
+	"github.com/mzdyhrave/legaliosgo/internal/props"
+	"github.com/mzdyhrave/legaliosgo/internal/types"
 )
 
 type IProviderSalary interface {
@@ -14,3 +14,4 @@ type IProviderSalary interface {
 	MinMonthlyWage(period types.IPeriod) int32
 	MinHourlyWage(period types.IPeriod) int32
 }
+

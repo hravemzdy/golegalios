@@ -1,17 +1,17 @@
 package service
 
 import (
-	"github.com/hravemzdy/golegalios/internal/factories"
+	"github.com/mzdyhrave/legaliosgo/internal/factories"
 	. "github.com/shopspring/decimal"
 	"math"
 	"testing"
 )
 
 type testIntParams struct {
-	testName    string
-	testYear    int16
-	testMonth   int16
-	resultYear  int16
+	testName string
+	testYear int16
+	testMonth int16
+	resultYear int16
 	resultMonth int16
 	resultValue int32
 }
@@ -21,10 +21,10 @@ type testIntScenario struct {
 }
 
 type testDecParams struct {
-	testName    string
-	testYear    int16
-	testMonth   int16
-	resultYear  int16
+	testName string
+	testYear int16
+	testMonth int16
+	resultYear int16
 	resultMonth int16
 	resultValue float64
 }
@@ -72,6 +72,8 @@ func (tt testDecParams) testBasicResult(t *testing.T, bundle factories.IBundlePr
 }
 
 func (tt testDecParams) resultValueDec() Decimal {
-	intValue := int64(math.Floor(tt.resultValue * 100))
+	intValue := int64(math.Floor(tt.resultValue*100))
 	return NewFromInt(intValue).Div(NewFromInt(100))
 }
+
+

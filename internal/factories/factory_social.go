@@ -1,22 +1,22 @@
 package factories
 
 import (
-	"github.com/hravemzdy/golegalios/internal/props"
-	"github.com/hravemzdy/golegalios/internal/providers"
-	"github.com/hravemzdy/golegalios/internal/providers/period2010"
-	"github.com/hravemzdy/golegalios/internal/providers/period2011"
-	"github.com/hravemzdy/golegalios/internal/providers/period2012"
-	"github.com/hravemzdy/golegalios/internal/providers/period2013"
-	"github.com/hravemzdy/golegalios/internal/providers/period2014"
-	"github.com/hravemzdy/golegalios/internal/providers/period2015"
-	"github.com/hravemzdy/golegalios/internal/providers/period2016"
-	"github.com/hravemzdy/golegalios/internal/providers/period2017"
-	"github.com/hravemzdy/golegalios/internal/providers/period2018"
-	"github.com/hravemzdy/golegalios/internal/providers/period2019"
-	"github.com/hravemzdy/golegalios/internal/providers/period2020"
-	"github.com/hravemzdy/golegalios/internal/providers/period2021"
-	"github.com/hravemzdy/golegalios/internal/providers/period2022"
-	"github.com/hravemzdy/golegalios/internal/types"
+	"github.com/mzdyhrave/legaliosgo/internal/props"
+	"github.com/mzdyhrave/legaliosgo/internal/providers"
+	"github.com/mzdyhrave/legaliosgo/internal/providers/period2010"
+	"github.com/mzdyhrave/legaliosgo/internal/providers/period2011"
+	"github.com/mzdyhrave/legaliosgo/internal/providers/period2012"
+	"github.com/mzdyhrave/legaliosgo/internal/providers/period2013"
+	"github.com/mzdyhrave/legaliosgo/internal/providers/period2014"
+	"github.com/mzdyhrave/legaliosgo/internal/providers/period2015"
+	"github.com/mzdyhrave/legaliosgo/internal/providers/period2016"
+	"github.com/mzdyhrave/legaliosgo/internal/providers/period2017"
+	"github.com/mzdyhrave/legaliosgo/internal/providers/period2018"
+	"github.com/mzdyhrave/legaliosgo/internal/providers/period2019"
+	"github.com/mzdyhrave/legaliosgo/internal/providers/period2020"
+	"github.com/mzdyhrave/legaliosgo/internal/providers/period2021"
+	"github.com/mzdyhrave/legaliosgo/internal/providers/period2022"
+	"github.com/mzdyhrave/legaliosgo/internal/types"
 )
 
 type IFactorySocial interface {
@@ -27,7 +27,7 @@ type IFactorySocial interface {
 }
 
 type factorySocial struct {
-	defaultProvider  providers.IProviderSocial
+	defaultProvider   providers.IProviderSocial
 	emptyPeriodProps props.IPropsSocial
 
 	versions map[providers.VERSION]providers.IProviderSocial
@@ -67,7 +67,7 @@ func (f factorySocial) getProvider(period types.IPeriod, defProvider providers.I
 
 func NewFactorySocial() IFactorySocial {
 	return factorySocial{
-		defaultProvider:  period2022.NewProviderSocial2022(),
+		defaultProvider:   period2022.NewProviderSocial2022(),
 		emptyPeriodProps: props.EmptyPropsSocial(),
 		versions: map[providers.VERSION]providers.IProviderSocial{
 			providers.VERSION(period2010.SOCIAL_VERSION_CODE): period2010.NewProviderSocial2010(),
@@ -86,3 +86,4 @@ func NewFactorySocial() IFactorySocial {
 		},
 	}
 }
+

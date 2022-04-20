@@ -1,7 +1,7 @@
 package props
 
 import (
-	"github.com/hravemzdy/golegalios/internal/types"
+	"github.com/mzdyhrave/legaliosgo/internal/types"
 	. "github.com/shopspring/decimal"
 )
 
@@ -11,7 +11,7 @@ type IPropsSalary interface {
 	WorkingShiftTime() int32
 	MinMonthlyWage() int32
 	MinHourlyWage() int32
-
+	
 	ValueEquals(otherSalary IPropsSalary) bool
 	CoeffWithPartAndFullHours(fullWorkHours Decimal, partWorkHours Decimal) Decimal
 	PaymentWithMonthlyAndFullWeekAndFullAndWorkHours(amountMonthly Decimal, fullWeekHours int32, partWeekHours int32, fullWorkHours int32, partWorkHours int32) Decimal
@@ -31,7 +31,7 @@ type IPropsSalary interface {
 	TariffWithPaymentAndHours(amountHourly Decimal, workingsHours Decimal) Decimal
 	PaymentWithAmountFixed(amountFixed Decimal) Decimal
 	PaymentRoundUpWithAmountFixed(amountFixed Decimal) Decimal
-
+	
 	HoursToHalfHoursUp(hoursValue Decimal) Decimal
 	HoursToQuartHoursUp(hoursValue Decimal) Decimal
 	HoursToHalfHoursDown(hoursValue Decimal) Decimal
@@ -47,8 +47,8 @@ type PropsSalary struct {
 	propsBase
 	workingShiftWeek int32
 	workingShiftTime int32
-	minMonthlyWage   int32
-	minHourlyWage    int32
+	minMonthlyWage int32
+	minHourlyWage int32
 }
 
 func (p PropsSalary) WorkingShiftWeek() int32 {
@@ -71,10 +71,10 @@ func (p PropsSalary) ValueEquals(otherSalary IPropsSalary) bool {
 	if otherSalary == nil {
 		return false
 	}
-	return p.workingShiftWeek == otherSalary.WorkingShiftWeek() &&
-		p.workingShiftTime == otherSalary.WorkingShiftTime() &&
-		p.minMonthlyWage == otherSalary.MinMonthlyWage() &&
-		p.minHourlyWage == otherSalary.MinHourlyWage()
+	return  p.workingShiftWeek == otherSalary.WorkingShiftWeek() &&
+			p.workingShiftTime == otherSalary.WorkingShiftTime() &&
+			p.minMonthlyWage == otherSalary.MinMonthlyWage() &&
+			p.minHourlyWage == otherSalary.MinHourlyWage()
 }
 
 func (p PropsSalary) CoeffWithPartAndFullHours(fullWorkHours Decimal, partWorkHours Decimal) Decimal {
@@ -183,7 +183,7 @@ func NewPropsSalary(versionId types.IVersionId,
 	minMonthlyWage int32,
 	minHourlyWage int32) IPropsSalary {
 	return PropsSalary{
-		propsBase:        propsBase{Version: versionId},
+		propsBase:        propsBase{ Version: versionId },
 		workingShiftWeek: workingShiftWeek,
 		workingShiftTime: workingShiftTime,
 		minMonthlyWage:   minMonthlyWage,
@@ -193,10 +193,11 @@ func NewPropsSalary(versionId types.IVersionId,
 
 func EmptyPropsSalary() IPropsSalary {
 	return PropsSalary{
-		propsBase:        propsBase{Version: types.GetVersionId(types.VERSION_ZERO)},
+		propsBase:        propsBase{ Version: types.GetVersionId(types.VERSION_ZERO) },
 		workingShiftWeek: 0,
 		workingShiftTime: 0,
 		minMonthlyWage:   0,
 		minHourlyWage:    0,
 	}
 }
+

@@ -1,7 +1,7 @@
 package props
 
 import (
-	"github.com/hravemzdy/golegalios/internal/types"
+	"github.com/mzdyhrave/legaliosgo/internal/types"
 	. "github.com/shopspring/decimal"
 )
 
@@ -42,7 +42,7 @@ func (p PropsSocial) MarginIncomeAgr() int32 {
 }
 
 func (p PropsSocial) ValueEquals(otherSocial IPropsSocial) bool {
-	return p.propsSocialBase.ValueEquals(otherSocial)
+	return  p.propsSocialBase.ValueEquals(otherSocial)
 }
 
 func (p PropsSocial) HasParticy(term types.WorkSocialTerms, incomeTerm int32, incomeSpec int32) bool {
@@ -66,18 +66,12 @@ func (p PropsSocial) hasIncomeBasedAgreementsParticy(_term types.WorkSocialTerms
 func (p PropsSocial) hasIncomeCumulatedParticy(_term types.WorkSocialTerms) bool {
 	var particy bool = false
 	switch _term {
-	case types.SOCIAL_TERM_EMPLOYMENTS:
-		particy = false
-	case types.SOCIAL_TERM_AGREEM_TASK:
-		particy = true
-	case types.SOCIAL_TERM_SMALLS_EMPL:
-		particy = true
-	case types.SOCIAL_TERM_SHORTS_MEET:
-		particy = false
-	case types.SOCIAL_TERM_SHORTS_DENY:
-		particy = false
-	case types.SOCIAL_TERM_BY_CONTRACT:
-		particy = false
+	case types.SOCIAL_TERM_EMPLOYMENTS: particy = false
+	case types.SOCIAL_TERM_AGREEM_TASK: particy = true
+	case types.SOCIAL_TERM_SMALLS_EMPL: particy = true
+	case types.SOCIAL_TERM_SHORTS_MEET: particy = false
+	case types.SOCIAL_TERM_SHORTS_DENY: particy = false
+	case types.SOCIAL_TERM_BY_CONTRACT: particy = false
 	default:
 		particy = false
 	}
@@ -95,10 +89,10 @@ func (p PropsSocial) RoundedEmployerPaym(basisResult int32) int32 {
 }
 
 func (p PropsSocial) ResultOvercaps(baseSuma int32, overCaps int32) OvercapsResultPair {
-	maxBaseEmployee := max32(0, baseSuma-overCaps)
-	empBaseOvercaps := max32(0, baseSuma-maxBaseEmployee)
-	valBaseOvercaps := max32(0, overCaps-empBaseOvercaps)
-	return OvercapsResultPair{maxBaseEmployee, valBaseOvercaps}
+	maxBaseEmployee := max32(0, baseSuma - overCaps)
+	empBaseOvercaps := max32(0, baseSuma - maxBaseEmployee)
+	valBaseOvercaps := max32(0, overCaps - empBaseOvercaps)
+	return OvercapsResultPair {maxBaseEmployee, valBaseOvercaps }
 }
 
 func (p PropsSocial) AnnualsBasisCut(incomeList []ParticySocialTarget, annuityBasis int32) ParticySocialResultTriple {
@@ -115,8 +109,8 @@ func NewPropsSocial(versionId types.IVersionId,
 	marginIncomeEmp int32,
 	marginIncomeAgr int32) IPropsSocial {
 	return PropsSocial{
-		propsSocialBase: propsSocialBase{
-			propsBase:            propsBase{Version: versionId},
+		propsSocialBase: propsSocialBase {
+			propsBase:            propsBase{ Version: versionId },
 			maxAnnualsBasis:      maxAnnualsBasis,
 			factorEmployer:       factorEmployer,
 			factorEmployerHigher: factorEmployerHigher,
@@ -131,8 +125,8 @@ func NewPropsSocial(versionId types.IVersionId,
 
 func EmptyPropsSocial() IPropsSocial {
 	return PropsSocial{
-		propsSocialBase: propsSocialBase{
-			propsBase:            propsBase{Version: types.GetVersionId(types.VERSION_ZERO)},
+		propsSocialBase: propsSocialBase {
+			propsBase:            propsBase{ Version: types.GetVersionId(types.VERSION_ZERO) },
 			maxAnnualsBasis:      0,
 			factorEmployer:       NewFromFloat(0),
 			factorEmployerHigher: NewFromFloat(0),
@@ -144,3 +138,4 @@ func EmptyPropsSocial() IPropsSocial {
 		},
 	}
 }
+

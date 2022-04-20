@@ -1,9 +1,9 @@
 package golegalios
 
 import (
-	"github.com/hravemzdy/golegalios/internal/factories"
-	"github.com/hravemzdy/golegalios/internal/props"
-	"github.com/hravemzdy/golegalios/internal/types"
+	"github.com/mzdyhrave/legaliosgo/internal/factories"
+	"github.com/mzdyhrave/legaliosgo/internal/props"
+	"github.com/mzdyhrave/legaliosgo/internal/types"
 )
 
 type IPeriod = types.IPeriod
@@ -43,7 +43,7 @@ func EmptyBundleProps(period IPeriod) IBundleProps {
 }
 
 type IServiceLegalios interface {
-	GetBundle(period types.IPeriod) (provider factories.IBundleProps, err error)
+	GetBundle(period types.IPeriod)  (provider factories.IBundleProps, err error)
 }
 
 type legaliosService struct {
@@ -72,5 +72,6 @@ func (s legaliosService) GetBundle(period types.IPeriod) (provider factories.IBu
 }
 
 func NewLegaliosService() IServiceLegalios {
-	return legaliosService{builder: factories.NewBundleBuilder()}
+	return legaliosService{ builder: factories.NewBundleBuilder() }
 }
+

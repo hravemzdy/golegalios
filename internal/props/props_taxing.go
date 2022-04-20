@@ -1,7 +1,7 @@
 package props
 
 import (
-	"github.com/hravemzdy/golegalios/internal/types"
+	"github.com/mzdyhrave/legaliosgo/internal/types"
 	. "github.com/shopspring/decimal"
 )
 
@@ -191,12 +191,12 @@ func (p PropsTaxing) RoundedAdvancesPaym(supersResult int32, basisResult int32) 
 	var taxRate2Basis int32 = 0
 	if p.MarginIncomeOfTaxRate2() != 0 {
 		taxRate1Basis = min32(basisResult, p.MarginIncomeOfTaxRate2())
-		taxRate2Basis = max32(0, basisResult-p.MarginIncomeOfTaxRate2())
+		taxRate2Basis = max32(0, basisResult - p.MarginIncomeOfTaxRate2())
 	}
 	var taxRate1Taxing Decimal = Zero
 	if basisResult <= p.MarginIncomeOfRounding() {
 		taxRate1Taxing = types.Multiply(NewFromInt32(taxRate1Basis), factorAdvances)
-	} else {
+	} else 	{
 		taxRate1Taxing = types.Multiply(NewFromInt32(taxRate1Basis), factorAdvances)
 	}
 	var taxRate2Taxing Decimal = Zero
@@ -242,28 +242,28 @@ func NewPropsTaxing(versionId types.IVersionId,
 	marginIncomeOfWthAgr int32) IPropsTaxing {
 	return PropsTaxing{
 		propsTaxingBase: propsTaxingBase{
-			propsBase:              propsBase{Version: versionId},
-			allowancePayer:         allowancePayer,
-			allowanceDisab1st:      allowanceDisab1st,
-			allowanceDisab2nd:      allowanceDisab2nd,
-			allowanceDisab3rd:      allowanceDisab3rd,
-			allowanceStudy:         allowanceStudy,
-			allowanceChild1st:      allowanceChild1st,
-			allowanceChild2nd:      allowanceChild2nd,
-			allowanceChild3rd:      allowanceChild3rd,
-			factorAdvances:         factorAdvances,
-			factorWithhold:         factorWithhold,
-			factorSolidary:         factorSolidary,
-			factorTaxRate2:         factorTaxRate2,
-			minAmountOfTaxBonus:    minAmountOfTaxBonus,
-			maxAmountOfTaxBonus:    maxAmountOfTaxBonus,
+			propsBase:         propsBase{ Version: versionId },
+			allowancePayer:    allowancePayer,
+			allowanceDisab1st: allowanceDisab1st,
+			allowanceDisab2nd: allowanceDisab2nd,
+			allowanceDisab3rd: allowanceDisab3rd,
+			allowanceStudy:    allowanceStudy,
+			allowanceChild1st: allowanceChild1st,
+			allowanceChild2nd: allowanceChild2nd,
+			allowanceChild3rd: allowanceChild3rd,
+			factorAdvances:    factorAdvances,
+			factorWithhold:    factorWithhold,
+			factorSolidary:    factorSolidary,
+			factorTaxRate2:    factorTaxRate2,
+			minAmountOfTaxBonus: minAmountOfTaxBonus,
+			maxAmountOfTaxBonus: maxAmountOfTaxBonus,
 			marginIncomeOfTaxBonus: marginIncomeOfTaxBonus,
 			marginIncomeOfRounding: marginIncomeOfRounding,
 			marginIncomeOfWithhold: marginIncomeOfWithhold,
 			marginIncomeOfSolidary: marginIncomeOfSolidary,
 			marginIncomeOfTaxRate2: marginIncomeOfTaxRate2,
-			marginIncomeOfWthEmp:   marginIncomeOfWthEmp,
-			marginIncomeOfWthAgr:   marginIncomeOfWthAgr,
+			marginIncomeOfWthEmp: marginIncomeOfWthEmp,
+			marginIncomeOfWthAgr: marginIncomeOfWthAgr,
 		},
 	}
 }
@@ -296,3 +296,4 @@ func EmptyPropsTaxing() IPropsTaxing {
 		},
 	}
 }
+

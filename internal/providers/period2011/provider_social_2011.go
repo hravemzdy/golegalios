@@ -1,10 +1,10 @@
 package period2011
 
 import (
-	"github.com/hravemzdy/golegalios/internal/props"
-	"github.com/hravemzdy/golegalios/internal/providers"
-	"github.com/hravemzdy/golegalios/internal/types"
 	. "github.com/shopspring/decimal"
+	"github.com/mzdyhrave/legaliosgo/internal/providers"
+	"github.com/mzdyhrave/legaliosgo/internal/props"
+	"github.com/mzdyhrave/legaliosgo/internal/types"
 )
 
 type providerSocial2011 struct {

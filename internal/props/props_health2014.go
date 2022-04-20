@@ -1,7 +1,7 @@
 package props
 
 import (
-	"github.com/hravemzdy/golegalios/internal/types"
+	"github.com/mzdyhrave/legaliosgo/internal/types"
 	. "github.com/shopspring/decimal"
 )
 
@@ -42,7 +42,7 @@ func (p PropsHealth2014) MarginIncomeAgr() int32 {
 }
 
 func (p PropsHealth2014) ValueEquals(otherHealth IPropsHealth) bool {
-	return p.propsHealthBase.ValueEquals(otherHealth)
+	return  p.propsHealthBase.ValueEquals(otherHealth)
 }
 
 func (p PropsHealth2014) HasParticy(term types.WorkHealthTerms, incomeTerm int32, incomeSpec int32) bool {
@@ -65,14 +65,10 @@ func (p PropsHealth2014) hasIncomeBasedAgreementsParticy(_term types.WorkHealthT
 func (p PropsHealth2014) hasIncomeCumulatedParticy(_term types.WorkHealthTerms) bool {
 	var particy bool = false
 	switch _term {
-	case types.HEALTH_TERM_EMPLOYMENTS:
-		particy = false
-	case types.HEALTH_TERM_AGREEM_WORK:
-		particy = false
-	case types.HEALTH_TERM_AGREEM_TASK:
-		particy = false
-	case types.HEALTH_TERM_BY_CONTRACT:
-		particy = false
+	case types.HEALTH_TERM_EMPLOYMENTS: particy = false
+	case types.HEALTH_TERM_AGREEM_WORK: particy = false
+	case types.HEALTH_TERM_AGREEM_TASK: particy = false
+	case types.HEALTH_TERM_BY_CONTRACT: particy = false
 	default:
 		particy = false
 	}
@@ -107,14 +103,14 @@ func (p PropsHealth2014) RoundedAugmentEmployerPaym(basisGenerals int32, baseEmp
 	employeePayment := p.propsHealthBase.intInsuranceRoundUp(types.Multiply(NewFromInt32(baseEmployee), factorCompound).Add(
 		types.MultiplyAndDivide(NewFromInt32(basisGenerals), factorCompound, p.FactorEmployee())))
 
-	return max32(0, compoundPayment-employeePayment)
+	return max32(0, compoundPayment - employeePayment)
 }
 
 func (p PropsHealth2014) RoundedEmployerPaym(basisResult int32) int32 {
 	compoundPayment := p.RoundedCompoundPaym(basisResult)
 	employeePayment := p.RoundedEmployeePaym(basisResult)
 
-	return max32(0, compoundPayment-employeePayment)
+	return max32(0, compoundPayment - employeePayment)
 }
 
 func (p PropsHealth2014) AnnualsBasisCut(incomeList []ParticyHealthTarget, annuityBasis int32) ParticyHealthResultTriple {
@@ -131,8 +127,8 @@ func NewPropsHealth2014(versionId types.IVersionId,
 	marginIncomeEmp int32,
 	marginIncomeAgr int32) IPropsHealth {
 	return PropsHealth2014{
-		propsHealthBase: propsHealthBase{
-			propsBase:       propsBase{Version: versionId},
+		propsHealthBase: propsHealthBase {
+			propsBase:       propsBase{ Version: versionId },
 			minMonthlyBasis: minMonthlyBasis,
 			maxAnnualsBasis: maxAnnualsBasis,
 			limMonthlyState: limMonthlyState,
@@ -147,8 +143,8 @@ func NewPropsHealth2014(versionId types.IVersionId,
 
 func EmptyPropsHealth2014() IPropsHealth {
 	return PropsHealth2014{
-		propsHealthBase: propsHealthBase{
-			propsBase:       propsBase{Version: types.GetVersionId(types.VERSION_ZERO)},
+		propsHealthBase: propsHealthBase {
+			propsBase:       propsBase{ Version: types.GetVersionId(types.VERSION_ZERO) },
 			minMonthlyBasis: 0,
 			maxAnnualsBasis: 0,
 			limMonthlyState: 0,
@@ -160,3 +156,4 @@ func EmptyPropsHealth2014() IPropsHealth {
 		},
 	}
 }
+

@@ -1,9 +1,9 @@
 package period2015
 
 import (
-	"github.com/hravemzdy/golegalios/internal/props"
-	"github.com/hravemzdy/golegalios/internal/providers"
-	"github.com/hravemzdy/golegalios/internal/types"
+	"github.com/mzdyhrave/legaliosgo/internal/providers"
+	"github.com/mzdyhrave/legaliosgo/internal/props"
+	"github.com/mzdyhrave/legaliosgo/internal/types"
 )
 
 type providerSalary2015 struct {
@@ -23,6 +23,7 @@ func (b providerSalary2015) GetProps(period types.IPeriod) props.IPropsSalary {
 		b.MinMonthlyWage(period),
 		b.MinHourlyWage(period))
 }
+
 
 func (b providerSalary2015) WorkingShiftWeek(period types.IPeriod) int32 {
 	return SALARY_WORKING_SHIFT_WEEK

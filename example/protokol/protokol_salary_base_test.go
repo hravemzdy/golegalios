@@ -1,12 +1,11 @@
-//go:build protokolFile
 // +build protokolFile
 
 package protokol
 
 import (
-	"github.com/hravemzdy/golegalios/internal/factories"
-	"github.com/hravemzdy/golegalios/internal/props"
-	"github.com/hravemzdy/golegalios/internal/types"
+	"github.com/mzdyhrave/legaliosgo/internal/factories"
+	"github.com/mzdyhrave/legaliosgo/internal/props"
+	"github.com/mzdyhrave/legaliosgo/internal/types"
 	. "github.com/shopspring/decimal"
 	"os"
 	"testing"
@@ -19,7 +18,7 @@ func exportSalaryPropsIntLine(protokol *os.File, testYear int16, sut factories.I
 	exportPropsYear(protokol, testYear)
 
 	var testMonth int16
-	for testMonth = 1; testMonth <= 12; testMonth++ {
+	for testMonth = 1; testMonth <=12; testMonth++ {
 		testPeriod := types.GetPeriodWithYearMonth(testYear, testMonth)
 		testResult, exists := sut.GetProps(testPeriod)
 		var testValue int32 = 0
@@ -35,7 +34,7 @@ func exportSalaryPropsDecLine(protokol *os.File, testYear int16, sut factories.I
 	exportPropsYear(protokol, testYear)
 
 	var testMonth int16
-	for testMonth = 1; testMonth <= 12; testMonth++ {
+	for testMonth = 1; testMonth <=12; testMonth++ {
 		testPeriod := types.GetPeriodWithYearMonth(testYear, testMonth)
 		testResult, exists := sut.GetProps(testPeriod)
 		var testValue Decimal = NewFromFloat(0)
@@ -47,8 +46,8 @@ func exportSalaryPropsDecLine(protokol *os.File, testYear int16, sut factories.I
 	exportPropsEnd(protokol)
 }
 
-func exportSalaryPropsIntFile(t *testing.T, fileName string, minYear int16, maxYear int16, sut factories.IFactorySalary, function propsSalaryIntFunc) {
-	testProtokol, err := createProtokolFile(fileName)
+func exportSalaryPropsIntFile(t *testing.T, baseName string, fileName string, minYear int16, maxYear int16, sut factories.IFactorySalary, function propsSalaryIntFunc) {
+	testProtokol, err := createProtokolFile(baseName, fileName)
 
 	if err != nil {
 		t.Errorf("Error creating file %s", err)
@@ -64,8 +63,8 @@ func exportSalaryPropsIntFile(t *testing.T, fileName string, minYear int16, maxY
 	}
 }
 
-func exportSalaryPropsDecFile(t *testing.T, fileName string, minYear int16, maxYear int16, sut factories.IFactorySalary, function propsSalaryDecFunc) {
-	testProtokol, err := createProtokolFile(fileName)
+func exportSalaryPropsDecFile(t *testing.T, baseName string, fileName string, minYear int16, maxYear int16, sut factories.IFactorySalary, function propsSalaryDecFunc) {
+	testProtokol, err := createProtokolFile(baseName, fileName)
 
 	if err != nil {
 		t.Errorf("Error creating file %s", err)
@@ -77,6 +76,7 @@ func exportSalaryPropsDecFile(t *testing.T, fileName string, minYear int16, maxY
 	exportPropsStart(testProtokol)
 
 	for testYear := minYear; testYear <= maxYear; testYear++ {
-		exportSalaryPropsDecLine(testProtokol, testYear, sut, function)
+		exportSalaryPropsDecLine(testProtokol, testYear, sut, function )
 	}
 }
+
