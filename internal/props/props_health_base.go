@@ -1,7 +1,7 @@
 package props
 
 import (
-	"github.com/mzdyhrave/legaliosgo/internal/types"
+	"github.com/hravemzdy/golegalios/internal/types"
 	. "github.com/shopspring/decimal"
 )
 
@@ -32,8 +32,8 @@ type propsHealthBase struct {
 	maxAnnualsBasis int32
 	limMonthlyState int32
 	limMonthlyDis50 int32
-	factorCompound Decimal
-	factorEmployee Decimal
+	factorCompound  Decimal
+	factorEmployee  Decimal
 	marginIncomeEmp int32
 	marginIncomeAgr int32
 }
@@ -74,14 +74,14 @@ func (p propsHealthBase) ValueEquals(otherHealth IPropsHealth) bool {
 	if otherHealth == nil {
 		return false
 	}
-	return  p.minMonthlyBasis == otherHealth.MinMonthlyBasis() &&
-			p.maxAnnualsBasis == otherHealth.MaxAnnualsBasis() &&
-			p.limMonthlyState == otherHealth.LimMonthlyState() &&
-			p.limMonthlyDis50 == otherHealth.LimMonthlyDis50() &&
-			p.factorCompound.Equal(otherHealth.FactorCompound()) &&
-			p.factorEmployee.Equal(otherHealth.FactorEmployee()) &&
-			p.marginIncomeEmp == otherHealth.MarginIncomeEmp() &&
-			p.marginIncomeAgr == otherHealth.MarginIncomeAgr()
+	return p.minMonthlyBasis == otherHealth.MinMonthlyBasis() &&
+		p.maxAnnualsBasis == otherHealth.MaxAnnualsBasis() &&
+		p.limMonthlyState == otherHealth.LimMonthlyState() &&
+		p.limMonthlyDis50 == otherHealth.LimMonthlyDis50() &&
+		p.factorCompound.Equal(otherHealth.FactorCompound()) &&
+		p.factorEmployee.Equal(otherHealth.FactorEmployee()) &&
+		p.marginIncomeEmp == otherHealth.MarginIncomeEmp() &&
+		p.marginIncomeAgr == otherHealth.MarginIncomeAgr()
 }
 
 func (p propsHealthBase) HasParticy(term types.WorkHealthTerms, incomeTerm int32, incomeSpec int32) bool {
@@ -104,10 +104,14 @@ func (p propsHealthBase) hasIncomeBasedAgreementsParticy(_term types.WorkHealthT
 func (p propsHealthBase) hasIncomeCumulatedParticy(_term types.WorkHealthTerms) bool {
 	var particy bool = false
 	switch _term {
-	case types.HEALTH_TERM_EMPLOYMENTS: particy = false
-	case types.HEALTH_TERM_AGREEM_WORK: particy = true
-	case types.HEALTH_TERM_AGREEM_TASK: particy = true
-	case types.HEALTH_TERM_BY_CONTRACT: particy = false
+	case types.HEALTH_TERM_EMPLOYMENTS:
+		particy = false
+	case types.HEALTH_TERM_AGREEM_WORK:
+		particy = true
+	case types.HEALTH_TERM_AGREEM_TASK:
+		particy = true
+	case types.HEALTH_TERM_BY_CONTRACT:
+		particy = false
 	default:
 		particy = false
 	}
@@ -123,10 +127,10 @@ func (p propsHealthBase) intInsuranceRoundUp(valueDec Decimal) int32 {
 }
 
 func (p propsHealthBase) HasParticyWithAdapters(term types.WorkHealthTerms, incomeTerm int32, incomeSpec int32,
-	hasTermExemptionParticy func (types.WorkHealthTerms) bool,
-	hasIncomeBasedEmploymentParticy func (types.WorkHealthTerms) bool,
-	hasIncomeBasedAgreementsParticy func (types.WorkHealthTerms) bool,
-	hasIncomeCumulatedParticy func (types.WorkHealthTerms) bool) bool {
+	hasTermExemptionParticy func(types.WorkHealthTerms) bool,
+	hasIncomeBasedEmploymentParticy func(types.WorkHealthTerms) bool,
+	hasIncomeBasedAgreementsParticy func(types.WorkHealthTerms) bool,
+	hasIncomeCumulatedParticy func(types.WorkHealthTerms) bool) bool {
 	var particySpec bool = true
 	if hasTermExemptionParticy(term) {
 		particySpec = false
@@ -184,22 +188,22 @@ func (p propsHealthBase) RoundedAugmentEmployerPaym(basisGenerals int32, baseEmp
 	employeePayment := p.intInsuranceRoundUp(types.Multiply(NewFromInt32(baseEmployee), factorCompound).Add(
 		types.MultiplyAndDivide(NewFromInt32(basisGenerals), factorCompound, p.FactorEmployee())))
 
-	return max32(0, compoundPayment - employeePayment)
+	return max32(0, compoundPayment-employeePayment)
 }
 
 func (p propsHealthBase) RoundedEmployerPaym(basisResult int32) int32 {
 	compoundPayment := p.RoundedCompoundPaym(basisResult)
 	employeePayment := p.RoundedEmployeePaym(basisResult)
 
-	return max32(0, compoundPayment - employeePayment)
+	return max32(0, compoundPayment-employeePayment)
 }
 
 func (p propsHealthBase) AnnualsBasisCut(incomeList []ParticyHealthTarget, annuityBasis int32) ParticyHealthResultTriple {
 	var annualyMaxim int32 = p.MaxAnnualsBasis()
 
-	annualsBasis := max32(0, annualyMaxim - annuityBasis)
+	annualsBasis := max32(0, annualyMaxim-annuityBasis)
 
-	var resultList = ParticyHealthResultTriple {annualyMaxim, annualsBasis, []ParticyHealthResult{} }
+	var resultList = ParticyHealthResultTriple{annualyMaxim, annualsBasis, []ParticyHealthResult{}}
 
 	for _, x := range incomeList {
 		var cutAnnualsBasis int32 = 0
@@ -209,10 +213,10 @@ func (p propsHealthBase) AnnualsBasisCut(incomeList []ParticyHealthTarget, annui
 		if x.particyCode != 0 {
 			cutAnnualsBasis = rawAnnualsBasis
 			if resultList.maxBase > 0 {
-				ovrAnnualsBasis := max32(0, rawAnnualsBasis - resultList.remBase)
+				ovrAnnualsBasis := max32(0, rawAnnualsBasis-resultList.remBase)
 				cutAnnualsBasis = rawAnnualsBasis - ovrAnnualsBasis
 			}
-			remAnnualsBasis = max32(0, resultList.remBase - cutAnnualsBasis)
+			remAnnualsBasis = max32(0, resultList.remBase-cutAnnualsBasis)
 		}
 
 		r := ParticyHealthResult{
@@ -224,9 +228,8 @@ func (p propsHealthBase) AnnualsBasisCut(incomeList []ParticyHealthTarget, annui
 			targetsBase:  x.targetsBase,
 			resultsBase:  max32(0, cutAnnualsBasis),
 		}
-		resultList = ParticyHealthResultTriple {resultList.maxBase, remAnnualsBasis, append(resultList.resList, r) }
+		resultList = ParticyHealthResultTriple{resultList.maxBase, remAnnualsBasis, append(resultList.resList, r)}
 	}
 
 	return resultList
 }
-

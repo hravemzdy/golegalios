@@ -1,11 +1,12 @@
+//go:build protokolFile
 // +build protokolFile
 
 package protokol
 
 import (
-	"github.com/mzdyhrave/legaliosgo/internal/factories"
-	"github.com/mzdyhrave/legaliosgo/internal/props"
-	"github.com/mzdyhrave/legaliosgo/internal/types"
+	"github.com/hravemzdy/golegalios/internal/factories"
+	"github.com/hravemzdy/golegalios/internal/props"
+	"github.com/hravemzdy/golegalios/internal/types"
 	. "github.com/shopspring/decimal"
 	"os"
 	"testing"
@@ -18,7 +19,7 @@ func exportHealthPropsIntLine(protokol *os.File, testYear int16, sut factories.I
 	exportPropsYear(protokol, testYear)
 
 	var testMonth int16
-	for testMonth = 1; testMonth <=12; testMonth++ {
+	for testMonth = 1; testMonth <= 12; testMonth++ {
 		testPeriod := types.GetPeriodWithYearMonth(testYear, testMonth)
 		testResult, exists := sut.GetProps(testPeriod)
 		var testValue int32 = 0
@@ -34,7 +35,7 @@ func exportHealthPropsDecLine(protokol *os.File, testYear int16, sut factories.I
 	exportPropsYear(protokol, testYear)
 
 	var testMonth int16
-	for testMonth = 1; testMonth <=12; testMonth++ {
+	for testMonth = 1; testMonth <= 12; testMonth++ {
 		testPeriod := types.GetPeriodWithYearMonth(testYear, testMonth)
 		testResult, exists := sut.GetProps(testPeriod)
 		var testValue Decimal = NewFromFloat(0)
@@ -76,7 +77,6 @@ func exportHealthPropsDecFile(t *testing.T, baseName string, fileName string, mi
 	exportPropsStart(testProtokol)
 
 	for testYear := minYear; testYear <= maxYear; testYear++ {
-		exportHealthPropsDecLine(testProtokol, testYear, sut, function )
+		exportHealthPropsDecLine(testProtokol, testYear, sut, function)
 	}
 }
-

@@ -1,8 +1,8 @@
 package factories
 
 import (
-	"github.com/mzdyhrave/legaliosgo/internal/props"
-	"github.com/mzdyhrave/legaliosgo/internal/types"
+	"github.com/hravemzdy/golegalios/internal/props"
+	"github.com/hravemzdy/golegalios/internal/types"
 )
 
 type IBundleProps interface {
@@ -42,25 +42,23 @@ func (b bundleProps) GetTaxingProps() props.IPropsTaxing {
 	return b.taxingProps
 }
 
-
 func NewBundleProps(period types.IPeriod,
 	bundleSalary props.IPropsSalary,
 	bundleHealth props.IPropsHealth,
 	bundleSocial props.IPropsSocial,
 	bundleTaxing props.IPropsTaxing) IBundleProps {
-	return bundleProps{ periodProps: period,
+	return bundleProps{periodProps: period,
 		salaryProps: bundleSalary,
 		healthProps: bundleHealth,
 		socialProps: bundleSocial,
-		taxingProps: bundleTaxing }
+		taxingProps: bundleTaxing}
 }
 
 func EmptyBundleProps(period types.IPeriod) IBundleProps {
-	return bundleProps{ periodProps: period,
+	return bundleProps{periodProps: period,
 		salaryProps: props.EmptyPropsSalary(),
 		healthProps: props.EmptyPropsHealth(),
 		socialProps: props.EmptyPropsSocial(),
 		taxingProps: props.EmptyPropsTaxing(),
 	}
 }
-

@@ -1,8 +1,8 @@
 package factories
 
 import (
-	"github.com/mzdyhrave/legaliosgo/internal/props"
-	"github.com/mzdyhrave/legaliosgo/internal/types"
+	"github.com/hravemzdy/golegalios/internal/props"
+	"github.com/hravemzdy/golegalios/internal/types"
 )
 
 const (
@@ -35,7 +35,7 @@ func (b bundleBuilder) GetBundle(period types.IPeriod) (IBundleProps, bool) {
 	socialProps, socialExists := b.socialFactory.GetProps(period)
 	taxingProps, taxingExists := b.taxingFactory.GetProps(period)
 
-	if salaryExists == false || healthExists == false || socialExists  == false || taxingExists == false {
+	if salaryExists == false || healthExists == false || socialExists == false || taxingExists == false {
 		return nil, false
 	}
 	if b.isValidBundle(salaryProps, healthProps, socialProps, taxingProps) == false {
@@ -64,18 +64,18 @@ func (b bundleBuilder) isValidBundle(salary props.IPropsSalary, health props.IPr
 	return true
 }
 
-func  (b bundleBuilder) getSalaryProps(period types.IPeriod) (props.IPropsSalary, bool) {
+func (b bundleBuilder) getSalaryProps(period types.IPeriod) (props.IPropsSalary, bool) {
 	return b.salaryFactory.GetProps(period)
 }
 
-func  (b bundleBuilder) getHealthProps(period types.IPeriod) (props.IPropsHealth, bool) {
+func (b bundleBuilder) getHealthProps(period types.IPeriod) (props.IPropsHealth, bool) {
 	return b.healthFactory.GetProps(period)
 }
 
-func  (b bundleBuilder) getSocialProps(period types.IPeriod) (props.IPropsSocial, bool) {
+func (b bundleBuilder) getSocialProps(period types.IPeriod) (props.IPropsSocial, bool) {
 	return b.socialFactory.GetProps(period)
 }
 
-func  (b bundleBuilder) getTaxingProps(period types.IPeriod) (props.IPropsTaxing, bool) {
+func (b bundleBuilder) getTaxingProps(period types.IPeriod) (props.IPropsTaxing, bool) {
 	return b.taxingFactory.GetProps(period)
 }
