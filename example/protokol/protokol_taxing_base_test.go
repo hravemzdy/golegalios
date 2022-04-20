@@ -1,11 +1,12 @@
+//go:build protokolFile
 // +build protokolFile
 
 package protokol
 
 import (
-	"github.com/mzdyhrave/legaliosgo/internal/factories"
-	"github.com/mzdyhrave/legaliosgo/internal/props"
-	"github.com/mzdyhrave/legaliosgo/internal/types"
+	"github.com/hravemzdy/golegalios/internal/factories"
+	"github.com/hravemzdy/golegalios/internal/props"
+	"github.com/hravemzdy/golegalios/internal/types"
 	. "github.com/shopspring/decimal"
 	"os"
 	"testing"
@@ -18,7 +19,7 @@ func exportTaxingPropsIntLine(protokol *os.File, testYear int16, sut factories.I
 	exportPropsYear(protokol, testYear)
 
 	var testMonth int16
-	for testMonth = 1; testMonth <=12; testMonth++ {
+	for testMonth = 1; testMonth <= 12; testMonth++ {
 		testPeriod := types.GetPeriodWithYearMonth(testYear, testMonth)
 		testResult, exists := sut.GetProps(testPeriod)
 		var testValue int32 = 0
@@ -34,7 +35,7 @@ func exportTaxingPropsDecLine(protokol *os.File, testYear int16, sut factories.I
 	exportPropsYear(protokol, testYear)
 
 	var testMonth int16
-	for testMonth = 1; testMonth <=12; testMonth++ {
+	for testMonth = 1; testMonth <= 12; testMonth++ {
 		testPeriod := types.GetPeriodWithYearMonth(testYear, testMonth)
 		testResult, exists := sut.GetProps(testPeriod)
 		var testValue Decimal = NewFromFloat(0)
@@ -46,8 +47,8 @@ func exportTaxingPropsDecLine(protokol *os.File, testYear int16, sut factories.I
 	exportPropsEnd(protokol)
 }
 
-func exportTaxingPropsIntFile(t *testing.T, baseName string, fileName string, minYear int16, maxYear int16, sut factories.IFactoryTaxing, function propsTaxingIntFunc) {
-	testProtokol, err := createProtokolFile(baseName, fileName)
+func exportTaxingPropsIntFile(t *testing.T, fileName string, minYear int16, maxYear int16, sut factories.IFactoryTaxing, function propsTaxingIntFunc) {
+	testProtokol, err := createProtokolFile(fileName)
 
 	if err != nil {
 		t.Errorf("Error creating file %s", err)
@@ -63,8 +64,8 @@ func exportTaxingPropsIntFile(t *testing.T, baseName string, fileName string, mi
 	}
 }
 
-func exportTaxingPropsDecFile(t *testing.T, baseName string, fileName string, minYear int16, maxYear int16, sut factories.IFactoryTaxing, function propsTaxingDecFunc) {
-	testProtokol, err := createProtokolFile(baseName, fileName)
+func exportTaxingPropsDecFile(t *testing.T, fileName string, minYear int16, maxYear int16, sut factories.IFactoryTaxing, function propsTaxingDecFunc) {
+	testProtokol, err := createProtokolFile(fileName)
 
 	if err != nil {
 		t.Errorf("Error creating file %s", err)
@@ -76,6 +77,6 @@ func exportTaxingPropsDecFile(t *testing.T, baseName string, fileName string, mi
 	exportPropsStart(testProtokol)
 
 	for testYear := minYear; testYear <= maxYear; testYear++ {
-		exportTaxingPropsDecLine(testProtokol, testYear, sut, function )
+		exportTaxingPropsDecLine(testProtokol, testYear, sut, function)
 	}
 }

@@ -1,8 +1,8 @@
 package providers
 
 import (
-	"github.com/mzdyhrave/legaliosgo/internal/props"
-	"github.com/mzdyhrave/legaliosgo/internal/types"
+	"github.com/hravemzdy/golegalios/internal/props"
+	"github.com/hravemzdy/golegalios/internal/types"
 	. "github.com/shopspring/decimal"
 )
 
@@ -32,4 +32,3 @@ type IProviderTaxing interface {
 	MarginIncomeOfWthEmp(period types.IPeriod) int32
 	MarginIncomeOfWthAgr(period types.IPeriod) int32
 }
-

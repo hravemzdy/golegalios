@@ -1,7 +1,7 @@
 package props
 
 import (
-	"github.com/mzdyhrave/legaliosgo/internal/types"
+	"github.com/hravemzdy/golegalios/internal/types"
 )
 
 type IProps interface {
@@ -36,4 +36,3 @@ func min32(x, y int32) int32 {
 	}
 	return x
 }
-

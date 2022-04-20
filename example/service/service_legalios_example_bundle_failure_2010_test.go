@@ -1,35 +1,35 @@
 package service
 
 import (
-	service "github.com/mzdyhrave/legaliosgo"
+	service "github.com/hravemzdy/golegalios"
 	"testing"
 )
 
 func TestBundleFailure_ForYear2010(t *testing.T) {
 	type testParams struct {
-		testName string
-		testYear int16
+		testName  string
+		testYear  int16
 		testMonth int16
 	}
 	type testScenario struct {
 		title string
 		tests []testParams
 	}
-	testExamples := []testScenario {
+	testExamples := []testScenario{
 		{"2009",
 			[]testParams{
-				{ "2009-1", 2009, 1 },
-				{ "2009-2", 2009, 2 },
-				{ "2009-3", 2009, 3 },
-				{ "2009-4", 2009, 4 },
-				{ "2009-5", 2009, 5 },
-				{ "2009-6", 2009, 6 },
-				{ "2009-7", 2009, 7 },
-				{ "2009-8", 2009, 8 },
-				{ "2009-9", 2009, 9 },
-				{ "2009-10", 2009, 10 },
-				{ "2009-11", 2009, 11 },
-				{ "2009-12", 2009, 12 },
+				{"2009-1", 2009, 1},
+				{"2009-2", 2009, 2},
+				{"2009-3", 2009, 3},
+				{"2009-4", 2009, 4},
+				{"2009-5", 2009, 5},
+				{"2009-6", 2009, 6},
+				{"2009-7", 2009, 7},
+				{"2009-8", 2009, 8},
+				{"2009-9", 2009, 9},
+				{"2009-10", 2009, 10},
+				{"2009-11", 2009, 11},
+				{"2009-12", 2009, 12},
 			},
 		},
 	}

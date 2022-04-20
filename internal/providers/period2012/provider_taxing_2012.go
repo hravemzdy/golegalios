@@ -1,9 +1,9 @@
 package period2012
 
 import (
-	"github.com/mzdyhrave/legaliosgo/internal/props"
-	"github.com/mzdyhrave/legaliosgo/internal/providers"
-	"github.com/mzdyhrave/legaliosgo/internal/types"
+	"github.com/hravemzdy/golegalios/internal/props"
+	"github.com/hravemzdy/golegalios/internal/providers"
+	"github.com/hravemzdy/golegalios/internal/types"
 	. "github.com/shopspring/decimal"
 )
 
@@ -125,4 +125,3 @@ func (b providerTaxing2012) MarginIncomeOfWthEmp(period types.IPeriod) int32 {
 func (b providerTaxing2012) MarginIncomeOfWthAgr(period types.IPeriod) int32 {
 	return TAXING_MARGIN_INCOME_OF_WHT_AGR
 }
-

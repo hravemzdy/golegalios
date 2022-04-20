@@ -1,7 +1,7 @@
 package props
 
 import (
-	"github.com/mzdyhrave/legaliosgo/internal/types"
+	"github.com/hravemzdy/golegalios/internal/types"
 	. "github.com/shopspring/decimal"
 )
 
@@ -50,27 +50,27 @@ type IPropsTaxing interface {
 
 type propsTaxingBase struct {
 	propsBase
-	allowancePayer    int32
-	allowanceDisab1st int32
-	allowanceDisab2nd int32
-	allowanceDisab3rd int32
-	allowanceStudy int32
-	allowanceChild1st int32
-	allowanceChild2nd int32
-	allowanceChild3rd int32
-	factorAdvances Decimal
-	factorWithhold Decimal
-	factorSolidary Decimal
-	factorTaxRate2 Decimal
-	minAmountOfTaxBonus int32
-	maxAmountOfTaxBonus int32
+	allowancePayer         int32
+	allowanceDisab1st      int32
+	allowanceDisab2nd      int32
+	allowanceDisab3rd      int32
+	allowanceStudy         int32
+	allowanceChild1st      int32
+	allowanceChild2nd      int32
+	allowanceChild3rd      int32
+	factorAdvances         Decimal
+	factorWithhold         Decimal
+	factorSolidary         Decimal
+	factorTaxRate2         Decimal
+	minAmountOfTaxBonus    int32
+	maxAmountOfTaxBonus    int32
 	marginIncomeOfTaxBonus int32
 	marginIncomeOfRounding int32
 	marginIncomeOfWithhold int32
 	marginIncomeOfSolidary int32
 	marginIncomeOfTaxRate2 int32
-	marginIncomeOfWthEmp int32
-	marginIncomeOfWthAgr int32
+	marginIncomeOfWthEmp   int32
+	marginIncomeOfWthAgr   int32
 }
 
 func (p propsTaxingBase) AllowancePayer() int32 {
@@ -161,27 +161,27 @@ func (p propsTaxingBase) ValueEquals(otherTaxing IPropsTaxing) bool {
 	if otherTaxing == nil {
 		return false
 	}
-	return  p.allowancePayer == otherTaxing.AllowancePayer() &&
-			p.allowanceDisab1st == otherTaxing.AllowanceDisab1st() &&
-			p.allowanceDisab2nd == otherTaxing.AllowanceDisab2nd() &&
-			p.allowanceDisab3rd == otherTaxing.AllowanceDisab3rd() &&
-			p.allowanceStudy == otherTaxing.AllowanceStudy() &&
-			p.allowanceChild1st == otherTaxing.AllowanceChild1st() &&
-			p.allowanceChild2nd == otherTaxing.AllowanceChild2nd() &&
-			p.allowanceChild3rd == otherTaxing.AllowanceChild3rd() &&
-			p.factorAdvances.Equal(otherTaxing.FactorAdvances()) &&
-			p.factorWithhold.Equal(otherTaxing.FactorWithhold()) &&
-			p.factorSolidary.Equal(otherTaxing.FactorSolidary()) &&
-			p.factorTaxRate2.Equal(otherTaxing.FactorTaxRate2()) &&
-			p.minAmountOfTaxBonus == otherTaxing.MinAmountOfTaxBonus() &&
-			p.maxAmountOfTaxBonus == otherTaxing.MaxAmountOfTaxBonus() &&
-			p.marginIncomeOfTaxBonus == otherTaxing.MarginIncomeOfTaxBonus() &&
-			p.marginIncomeOfRounding == otherTaxing.MarginIncomeOfRounding() &&
-			p.marginIncomeOfWithhold == otherTaxing.MarginIncomeOfWithhold() &&
-			p.marginIncomeOfSolidary == otherTaxing.MarginIncomeOfSolidary() &&
-			p.marginIncomeOfTaxRate2 == otherTaxing.MarginIncomeOfTaxRate2() &&
-			p.marginIncomeOfWthEmp == otherTaxing.MarginIncomeOfWthEmp() &&
-			p.marginIncomeOfWthAgr == otherTaxing.MarginIncomeOfWthAgr()
+	return p.allowancePayer == otherTaxing.AllowancePayer() &&
+		p.allowanceDisab1st == otherTaxing.AllowanceDisab1st() &&
+		p.allowanceDisab2nd == otherTaxing.AllowanceDisab2nd() &&
+		p.allowanceDisab3rd == otherTaxing.AllowanceDisab3rd() &&
+		p.allowanceStudy == otherTaxing.AllowanceStudy() &&
+		p.allowanceChild1st == otherTaxing.AllowanceChild1st() &&
+		p.allowanceChild2nd == otherTaxing.AllowanceChild2nd() &&
+		p.allowanceChild3rd == otherTaxing.AllowanceChild3rd() &&
+		p.factorAdvances.Equal(otherTaxing.FactorAdvances()) &&
+		p.factorWithhold.Equal(otherTaxing.FactorWithhold()) &&
+		p.factorSolidary.Equal(otherTaxing.FactorSolidary()) &&
+		p.factorTaxRate2.Equal(otherTaxing.FactorTaxRate2()) &&
+		p.minAmountOfTaxBonus == otherTaxing.MinAmountOfTaxBonus() &&
+		p.maxAmountOfTaxBonus == otherTaxing.MaxAmountOfTaxBonus() &&
+		p.marginIncomeOfTaxBonus == otherTaxing.MarginIncomeOfTaxBonus() &&
+		p.marginIncomeOfRounding == otherTaxing.MarginIncomeOfRounding() &&
+		p.marginIncomeOfWithhold == otherTaxing.MarginIncomeOfWithhold() &&
+		p.marginIncomeOfSolidary == otherTaxing.MarginIncomeOfSolidary() &&
+		p.marginIncomeOfTaxRate2 == otherTaxing.MarginIncomeOfTaxRate2() &&
+		p.marginIncomeOfWthEmp == otherTaxing.MarginIncomeOfWthEmp() &&
+		p.marginIncomeOfWthAgr == otherTaxing.MarginIncomeOfWthAgr()
 }
 
 func (p propsTaxingBase) intTaxRoundUp(valueDec Decimal) int32 {
@@ -277,10 +277,14 @@ func (p propsTaxingBase) BenefitAllowanceDisab(signOpts types.TaxDeclSignOption,
 	var benefitValue int32 = 0
 	if signOpts == types.DECL_TAX_DO_SIGNED {
 		switch benefitOpts {
-		case types.DISB_TAX_DISAB1: benefitValue = p.AllowanceDisab1st()
-		case types.DISB_TAX_DISAB2: benefitValue = p.AllowanceDisab2nd()
-		case types.DISB_TAX_DISAB3: benefitValue = p.AllowanceDisab3rd()
-		default: benefitValue = 0
+		case types.DISB_TAX_DISAB1:
+			benefitValue = p.AllowanceDisab1st()
+		case types.DISB_TAX_DISAB2:
+			benefitValue = p.AllowanceDisab2nd()
+		case types.DISB_TAX_DISAB3:
+			benefitValue = p.AllowanceDisab3rd()
+		default:
+			benefitValue = 0
 		}
 	}
 	return benefitValue
@@ -301,10 +305,14 @@ func (p propsTaxingBase) BenefitAllowanceChild(signOpts types.TaxDeclSignOption,
 	if signOpts == types.DECL_TAX_DO_SIGNED {
 		var benefitUnits int32 = 0
 		switch benefitOpts {
-		case 0: benefitUnits = p.AllowanceChild1st()
-		case 1: benefitUnits = p.AllowanceChild2nd()
-		case 2: benefitUnits = p.AllowanceChild3rd()
-		default: benefitUnits = 0
+		case 0:
+			benefitUnits = p.AllowanceChild1st()
+		case 1:
+			benefitUnits = p.AllowanceChild2nd()
+		case 2:
+			benefitUnits = p.AllowanceChild3rd()
+		default:
+			benefitUnits = 0
 		}
 		if benefitOpts == types.DECL_TAX_BENEF1 {
 			if disabelOpts == 1 {
@@ -318,7 +326,7 @@ func (p propsTaxingBase) BenefitAllowanceChild(signOpts types.TaxDeclSignOption,
 }
 
 func (p propsTaxingBase) BonusChildRaw(income int32, benefit int32, rebated int32) int32 {
-	var bonusForChild Decimal = NewFromInt32(min32(0, rebated - benefit)).Neg()
+	var bonusForChild Decimal = NewFromInt32(min32(0, rebated-benefit)).Neg()
 
 	if p.MarginIncomeOfTaxBonus() > 0 {
 		if income < p.MarginIncomeOfTaxBonus() {
@@ -336,7 +344,7 @@ func (p propsTaxingBase) BonusChildFix(income int32, benefit int32, rebated int3
 			return 0
 		}
 	}
-	if p.MaxAmountOfTaxBonus() > 0	{
+	if p.MaxAmountOfTaxBonus() > 0 {
 		if childBonus > p.MaxAmountOfTaxBonus() {
 			return p.MaxAmountOfTaxBonus()
 		}
@@ -376,7 +384,7 @@ func (p propsTaxingBase) RoundedBaseSolidary(incomeResult int32) int32 {
 
 	taxableIncome := max32(0, incomeResult)
 	if p.MarginIncomeOfSolidary() != 0 {
-		solidaryBase = max32(0, taxableIncome - p.MarginIncomeOfSolidary())
+		solidaryBase = max32(0, taxableIncome-p.MarginIncomeOfSolidary())
 	}
 	return solidaryBase
 }
@@ -412,4 +420,3 @@ func (p propsTaxingBase) RoundedWithholdPaym(supersResult int32, basisResult int
 	}
 	return withholdTaxing
 }
-

@@ -1,6 +1,6 @@
 package props
 
-import "github.com/mzdyhrave/legaliosgo/internal/types"
+import "github.com/hravemzdy/golegalios/internal/types"
 
 func cmpInt32(a, b int32) int {
 	if a == b {
@@ -69,8 +69,8 @@ func (p ParticyHealthTarget) IncomeScore() int32 {
 	}
 	return resultType + resultBase + interestRes + particyRes
 }
-func (p ParticyHealthTarget) ResultComparator() func (x ParticyHealthTarget, y ParticyHealthTarget) int {
-	return func (x ParticyHealthTarget, y ParticyHealthTarget) int {
+func (p ParticyHealthTarget) ResultComparator() func(x ParticyHealthTarget, y ParticyHealthTarget) int {
+	return func(x ParticyHealthTarget, y ParticyHealthTarget) int {
 		var xIncomeScore = x.IncomeScore()
 		var yIncomeScore = y.IncomeScore()
 
@@ -143,8 +143,8 @@ func (p ParticySocialTarget) IncomeScore() int32 {
 	return resultType + resultBase + interestRes + particyRes
 }
 
-func (p ParticySocialTarget) ResultComparator() func (x ParticySocialTarget, y ParticySocialTarget) int {
-	return func (x ParticySocialTarget, y ParticySocialTarget) int {
+func (p ParticySocialTarget) ResultComparator() func(x ParticySocialTarget, y ParticySocialTarget) int {
+	return func(x ParticySocialTarget, y ParticySocialTarget) int {
 		var xIncomeScore = x.IncomeScore()
 		var yIncomeScore = y.IncomeScore()
 

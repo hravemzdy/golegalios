@@ -1,21 +1,16 @@
-package factories_test
+package factories
 
 import (
 	"testing"
 
-	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
 
-type testParams struct {
-	testName   string
+type testEntry struct {
 	testYear   int16
 	testMonth  int16
 	resultYear int16
-}
-type testScenario struct {
-	title string
-	tests []testParams
 }
 
 func TestFactories(t *testing.T) {

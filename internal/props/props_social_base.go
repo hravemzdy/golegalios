@@ -1,7 +1,7 @@
 package props
 
 import (
-	"github.com/mzdyhrave/legaliosgo/internal/types"
+	"github.com/hravemzdy/golegalios/internal/types"
 	. "github.com/shopspring/decimal"
 )
 
@@ -26,14 +26,14 @@ type IPropsSocial interface {
 
 type propsSocialBase struct {
 	propsBase
-	maxAnnualsBasis int32
-	factorEmployer Decimal
+	maxAnnualsBasis      int32
+	factorEmployer       Decimal
 	factorEmployerHigher Decimal
-	factorEmployee Decimal
+	factorEmployee       Decimal
 	factorEmployeeGarant Decimal
 	factorEmployeeReduce Decimal
-	marginIncomeEmp int32
-	marginIncomeAgr int32
+	marginIncomeEmp      int32
+	marginIncomeAgr      int32
 }
 
 func (p propsSocialBase) MaxAnnualsBasis() int32 {
@@ -72,14 +72,14 @@ func (p propsSocialBase) ValueEquals(otherSocial IPropsSocial) bool {
 	if otherSocial == nil {
 		return false
 	}
-	return  p.maxAnnualsBasis == otherSocial.MaxAnnualsBasis() &&
-			p.factorEmployer.Equal(otherSocial.FactorEmployer()) &&
-			p.factorEmployerHigher.Equal(otherSocial.FactorEmployerHigher()) &&
-			p.factorEmployee.Equal(otherSocial.FactorEmployee()) &&
-			p.factorEmployeeGarant.Equal(otherSocial.FactorEmployeeGarant()) &&
-			p.factorEmployeeReduce.Equal(otherSocial.FactorEmployeeReduce()) &&
-			p.marginIncomeEmp == otherSocial.MarginIncomeEmp() &&
-			p.marginIncomeAgr == otherSocial.MarginIncomeAgr()
+	return p.maxAnnualsBasis == otherSocial.MaxAnnualsBasis() &&
+		p.factorEmployer.Equal(otherSocial.FactorEmployer()) &&
+		p.factorEmployerHigher.Equal(otherSocial.FactorEmployerHigher()) &&
+		p.factorEmployee.Equal(otherSocial.FactorEmployee()) &&
+		p.factorEmployeeGarant.Equal(otherSocial.FactorEmployeeGarant()) &&
+		p.factorEmployeeReduce.Equal(otherSocial.FactorEmployeeReduce()) &&
+		p.marginIncomeEmp == otherSocial.MarginIncomeEmp() &&
+		p.marginIncomeAgr == otherSocial.MarginIncomeAgr()
 }
 
 func (p propsSocialBase) HasParticy(term types.WorkSocialTerms, incomeTerm int32, incomeSpec int32) bool {
@@ -103,12 +103,18 @@ func (p propsSocialBase) hasIncomeBasedAgreementsParticy(_term types.WorkSocialT
 func (p propsSocialBase) hasIncomeCumulatedParticy(_term types.WorkSocialTerms) bool {
 	var particy bool = false
 	switch _term {
-	case types.SOCIAL_TERM_EMPLOYMENTS: particy = false
-	case types.SOCIAL_TERM_AGREEM_TASK: particy = true
-	case types.SOCIAL_TERM_SMALLS_EMPL: particy = true
-	case types.SOCIAL_TERM_SHORTS_MEET: particy = false
-	case types.SOCIAL_TERM_SHORTS_DENY: particy = false
-	case types.SOCIAL_TERM_BY_CONTRACT: particy = false
+	case types.SOCIAL_TERM_EMPLOYMENTS:
+		particy = false
+	case types.SOCIAL_TERM_AGREEM_TASK:
+		particy = true
+	case types.SOCIAL_TERM_SMALLS_EMPL:
+		particy = true
+	case types.SOCIAL_TERM_SHORTS_MEET:
+		particy = false
+	case types.SOCIAL_TERM_SHORTS_DENY:
+		particy = false
+	case types.SOCIAL_TERM_BY_CONTRACT:
+		particy = false
 	default:
 		particy = false
 	}
@@ -124,10 +130,10 @@ func (p propsSocialBase) intInsuranceRoundUp(valueDec Decimal) int32 {
 }
 
 func (p propsSocialBase) HasParticyWithAdapters(term types.WorkSocialTerms, incomeTerm int32, incomeSpec int32,
-	hasTermExemptionParticy func (types.WorkSocialTerms) bool,
-	hasIncomeBasedEmploymentParticy func (types.WorkSocialTerms) bool,
-	hasIncomeBasedAgreementsParticy func (types.WorkSocialTerms) bool,
-	hasIncomeCumulatedParticy func (types.WorkSocialTerms) bool) bool {
+	hasTermExemptionParticy func(types.WorkSocialTerms) bool,
+	hasIncomeBasedEmploymentParticy func(types.WorkSocialTerms) bool,
+	hasIncomeBasedAgreementsParticy func(types.WorkSocialTerms) bool,
+	hasIncomeCumulatedParticy func(types.WorkSocialTerms) bool) bool {
 	var particySpec bool = true
 	if hasTermExemptionParticy(term) {
 		particySpec = false
@@ -168,18 +174,18 @@ func (p propsSocialBase) RoundedEmployerPaym(basisResult int32) int32 {
 }
 
 func (p propsSocialBase) ResultOvercaps(baseSuma int32, overCaps int32) OvercapsResultPair {
-	maxBaseEmployee := max32(0, baseSuma - overCaps)
-	empBaseOvercaps := max32(0, baseSuma - maxBaseEmployee)
-	valBaseOvercaps := max32(0, overCaps - empBaseOvercaps)
-	return OvercapsResultPair {maxBaseEmployee, valBaseOvercaps }
+	maxBaseEmployee := max32(0, baseSuma-overCaps)
+	empBaseOvercaps := max32(0, baseSuma-maxBaseEmployee)
+	valBaseOvercaps := max32(0, overCaps-empBaseOvercaps)
+	return OvercapsResultPair{maxBaseEmployee, valBaseOvercaps}
 }
 
 func (p propsSocialBase) AnnualsBasisCut(incomeList []ParticySocialTarget, annuityBasis int32) ParticySocialResultTriple {
 	var annualyMaxim int32 = p.MaxAnnualsBasis()
 
-	annualsBasis := max32(0, annualyMaxim - annuityBasis)
+	annualsBasis := max32(0, annualyMaxim-annuityBasis)
 
-	var resultList = ParticySocialResultTriple {annualyMaxim, annualsBasis, []ParticySocialResult{} }
+	var resultList = ParticySocialResultTriple{annualyMaxim, annualsBasis, []ParticySocialResult{}}
 
 	for _, x := range incomeList {
 		var cutAnnualsBasis int32 = 0
@@ -189,10 +195,10 @@ func (p propsSocialBase) AnnualsBasisCut(incomeList []ParticySocialTarget, annui
 		if x.particyCode != 0 {
 			cutAnnualsBasis = rawAnnualsBasis
 			if resultList.maxBase > 0 {
-				ovrAnnualsBasis := max32(0, rawAnnualsBasis - resultList.remBase)
+				ovrAnnualsBasis := max32(0, rawAnnualsBasis-resultList.remBase)
 				cutAnnualsBasis = rawAnnualsBasis - ovrAnnualsBasis
 			}
-			remAnnualsBasis = max32(0, resultList.remBase - cutAnnualsBasis)
+			remAnnualsBasis = max32(0, resultList.remBase-cutAnnualsBasis)
 		}
 
 		r := ParticySocialResult{
@@ -204,9 +210,8 @@ func (p propsSocialBase) AnnualsBasisCut(incomeList []ParticySocialTarget, annui
 			targetsBase:  x.targetsBase,
 			resultsBase:  max32(0, cutAnnualsBasis),
 		}
-		resultList = ParticySocialResultTriple {resultList.maxBase, remAnnualsBasis, append(resultList.resList, r) }
+		resultList = ParticySocialResultTriple{resultList.maxBase, remAnnualsBasis, append(resultList.resList, r)}
 	}
 
 	return resultList
 }
-

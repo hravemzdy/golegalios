@@ -1,3 +1,4 @@
+//go:build protokolFile
 // +build protokolFile
 
 package service
@@ -10,17 +11,16 @@ import (
 )
 
 const (
-	EXAMPLE_FOLDER_PATH = "../../../../test_expected"
-	EXAMPLE_FOLDER_NAME = "test_expected"
-	PARENT_EXAMPLE_FOLDER_NAME = "legaliosgo"
+	EXAMPLE_FOLDER_NAME        = "test_expected"
+	PARENT_EXAMPLE_FOLDER_NAME = "legalios"
 )
 
-func createLoggerFile(baseName string, fileName string) (f *os.File, err error) {
+func createLoggerFile(fileName string) (f *os.File, err error) {
 	currPath, err := filepath.Abs(".")
 	if err != nil {
 		return nil, err
 	}
-	for  {
+	for {
 		_, lastName := filepath.Split(currPath)
 		if lastName == PARENT_EXAMPLE_FOLDER_NAME || currPath == "." || currPath == "/" {
 			break
@@ -38,49 +38,49 @@ func createLoggerFile(baseName string, fileName string) (f *os.File, err error) 
 }
 
 func logTestStart(protokol *os.File) {
-	if  _, err := fmt.Fprintf(protokol,""); err != nil {
+	if _, err := fmt.Fprintf(protokol, ""); err != nil {
 		return
 	}
-	if  _, err := fmt.Fprintf(protokol,"YEAR"); err != nil {
+	if _, err := fmt.Fprintf(protokol, "YEAR"); err != nil {
 		return
 	}
-	for testMonth := 1; testMonth <=12; testMonth++ {
-		if  _, err := fmt.Fprintf(protokol,"\t%d", testMonth); err != nil {
+	for testMonth := 1; testMonth <= 12; testMonth++ {
+		if _, err := fmt.Fprintf(protokol, "\t%d", testMonth); err != nil {
 			return
 		}
 	}
-	if  _, err := fmt.Fprintf(protokol,"\n"); err != nil {
+	if _, err := fmt.Fprintf(protokol, "\n"); err != nil {
 		return
 	}
 }
 
 func logTestEnd(protokol *os.File) {
-	if  _, err := fmt.Fprintf(protokol,"\n"); err != nil {
+	if _, err := fmt.Fprintf(protokol, "\n"); err != nil {
 		return
 	}
 }
 
 func logTestYear(protokol *os.File, value string) {
-	if  _, err := fmt.Fprintf(protokol,"%s", value); err != nil {
+	if _, err := fmt.Fprintf(protokol, "%s", value); err != nil {
 		return
 	}
 }
 
 func logExampleIntValue(protokol *os.File, value int32) {
-	if  _, err := fmt.Fprintf(protokol,"\t%d", value); err != nil {
+	if _, err := fmt.Fprintf(protokol, "\t%d", value); err != nil {
 		return
 	}
 }
 
 func logExampleDecValue(protokol *os.File, value float64) {
-	var intValue = int(value*100)
-	if  _, err := fmt.Fprintf(protokol,"\t%d", intValue); err != nil {
+	var intValue = int(value * 100)
+	if _, err := fmt.Fprintf(protokol, "\t%d", intValue); err != nil {
 		return
 	}
 }
 
 func logTestIntExamples(t *testing.T, fileName string, examples []testIntScenario) {
-	testProtokol, err := createLoggerFile(EXAMPLE_FOLDER_PATH, fileName)
+	testProtokol, err := createLoggerFile(fileName)
 
 	if err != nil {
 		t.Errorf("Error creating file %s", err)
@@ -102,7 +102,7 @@ func logTestIntExamples(t *testing.T, fileName string, examples []testIntScenari
 }
 
 func logTestDecExamples(t *testing.T, fileName string, examples []testDecScenario) {
-	testProtokol, err := createLoggerFile(EXAMPLE_FOLDER_PATH, fileName)
+	testProtokol, err := createLoggerFile(fileName)
 
 	if err != nil {
 		t.Errorf("Error creating file %s", err)

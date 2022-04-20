@@ -1,7 +1,7 @@
 package props
 
 import (
-	"github.com/mzdyhrave/legaliosgo/internal/types"
+	"github.com/hravemzdy/golegalios/internal/types"
 	. "github.com/shopspring/decimal"
 )
 
@@ -211,28 +211,28 @@ func NewPropsTaxing2010(versionId types.IVersionId,
 	marginIncomeOfWthAgr int32) IPropsTaxing {
 	return PropsTaxing2010{
 		propsTaxingBase: propsTaxingBase{
-			propsBase:         propsBase{ Version: versionId },
-			allowancePayer:    allowancePayer,
-			allowanceDisab1st: allowanceDisab1st,
-			allowanceDisab2nd: allowanceDisab2nd,
-			allowanceDisab3rd: allowanceDisab3rd,
-			allowanceStudy:    allowanceStudy,
-			allowanceChild1st: allowanceChild1st,
-			allowanceChild2nd: allowanceChild2nd,
-			allowanceChild3rd: allowanceChild3rd,
-			factorAdvances:    factorAdvances,
-			factorWithhold:    factorWithhold,
-			factorSolidary:    factorSolidary,
-			factorTaxRate2:    factorTaxRate2,
-			minAmountOfTaxBonus: minAmountOfTaxBonus,
-			maxAmountOfTaxBonus: maxAmountOfTaxBonus,
+			propsBase:              propsBase{Version: versionId},
+			allowancePayer:         allowancePayer,
+			allowanceDisab1st:      allowanceDisab1st,
+			allowanceDisab2nd:      allowanceDisab2nd,
+			allowanceDisab3rd:      allowanceDisab3rd,
+			allowanceStudy:         allowanceStudy,
+			allowanceChild1st:      allowanceChild1st,
+			allowanceChild2nd:      allowanceChild2nd,
+			allowanceChild3rd:      allowanceChild3rd,
+			factorAdvances:         factorAdvances,
+			factorWithhold:         factorWithhold,
+			factorSolidary:         factorSolidary,
+			factorTaxRate2:         factorTaxRate2,
+			minAmountOfTaxBonus:    minAmountOfTaxBonus,
+			maxAmountOfTaxBonus:    maxAmountOfTaxBonus,
 			marginIncomeOfTaxBonus: marginIncomeOfTaxBonus,
 			marginIncomeOfRounding: marginIncomeOfRounding,
 			marginIncomeOfWithhold: marginIncomeOfWithhold,
 			marginIncomeOfSolidary: marginIncomeOfSolidary,
 			marginIncomeOfTaxRate2: marginIncomeOfTaxRate2,
-			marginIncomeOfWthEmp: marginIncomeOfWthEmp,
-			marginIncomeOfWthAgr: marginIncomeOfWthAgr,
+			marginIncomeOfWthEmp:   marginIncomeOfWthEmp,
+			marginIncomeOfWthAgr:   marginIncomeOfWthAgr,
 		},
 	}
 }
@@ -265,4 +265,3 @@ func EmptyPropsTaxing2010() IPropsTaxing {
 		},
 	}
 }
-
