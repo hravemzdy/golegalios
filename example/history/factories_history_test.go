@@ -16,7 +16,7 @@ func TestFactoriesHistory(t *testing.T) {
 	minYear := 2010
 	maxYear := 2022
 
-	testProtokol, err := createHistoryFile(HISTORY_FOLDER_PATH, fmt.Sprintf("history_%d_%d.xls", minYear, maxYear))
+	testProtokol, err := createHistoryFile(fmt.Sprintf("history_%d_%d.xls", minYear, maxYear))
 
 	if err != nil {
 		t.Errorf("Error creating file %s", err)

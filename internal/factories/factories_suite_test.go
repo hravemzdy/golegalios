@@ -1,4 +1,4 @@
-package factories_test
+package factories
 
 import (
 	"testing"
@@ -7,15 +7,10 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-type testParams struct {
-	testName   string
+type testEntry struct {
 	testYear   int16
 	testMonth  int16
 	resultYear int16
-}
-type testScenario struct {
-	title string
-	tests []testParams
 }
 
 func TestFactories(t *testing.T) {
